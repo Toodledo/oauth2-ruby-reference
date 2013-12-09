@@ -10,11 +10,11 @@ We provide two examples:
 
 For the ToodledoOAuth2 class example, these are the dependencies:
 
-  gem install faraday
-  gem install json
+	gem install faraday
+	gem install json
 
 For the OAuth2 gem example, their gem is the dependency:
 
-  gem install oauth2
+	gem install oauth2
 
 To start using these examples, fill in your credentials (client_id and client_secret.)
