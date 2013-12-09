@@ -30,19 +30,19 @@ response = toodledo.accessToken(auth_code, state)
 access_token = response["access_token"]
 
 if access_token
-	puts "Access Token: #{access_token}"
+  puts "Access Token: #{access_token}"
 
-	refresh_token = response["refresh_token"]
-	puts "Refresh Token: #{refresh_token}"
+  refresh_token = response["refresh_token"]
+  puts "Refresh Token: #{refresh_token}"
 
-	# 4. Get access token based on refresh token
-	response = toodledo.accessTokenRefresh(refresh_token)
-	access_token = response["access_token"]
-	puts "Access Token from Refresh Token: #{access_token}"
+  # 4. Get access token based on refresh token
+  response = toodledo.accessTokenRefresh(refresh_token)
+  access_token = response["access_token"]
+  puts "Access Token from Refresh Token: #{access_token}"
 
-	# 5. Get resources based on access token
-	resource = toodledo.resource(resource_url, access_token)
-	puts "User Id: #{resource['userid']}"
+  # 5. Get resources based on access token
+  resource = toodledo.resource(resource_url, access_token)
+  puts "User Id: #{resource['userid']}"
 else
-	puts response["errorDesc"]
+  puts response["errorDesc"]
 end
