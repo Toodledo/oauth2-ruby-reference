@@ -11,8 +11,8 @@ state = "52a200bee3282"
 
 # Credentials
 
-client_id = ""
-client_secret = ""
+client_id = "alejandrotest" # ""
+client_secret = "api52a0d6560a8f9" # ""
 
 scope = "basic tasks"
 
@@ -24,23 +24,23 @@ site = URI.escape(authorization_url + "?response_type=code&client_id=" + client_
 # Build up oauth2 client params
 
 params = {
-	:site => site,
-	:authorize_url => site,
-	:token_url => "https://api.toodledo.com/3/account/token.php"
-}
+  :site => site,
+  :authorize_url => site,
+  :token_url => "https://api.toodledo.com/3/account/token.php"
+  }
 
 begin
-	# Request token
-	client = OAuth2::Client.new(client_id, client_secret, params)
-	token = client.auth_code.get_token(auth_code)
+  # Request token
+  client = OAuth2::Client.new(client_id, client_secret, params)
+  token = client.auth_code.get_token(auth_code)
 
-	# Referesh token example
-	token = token.refresh!
+  # Referesh token example
+  token = token.refresh!
 
-	# Get resource
-	resource = token.get('/3/account/get.php?', :params => { 'f' => 'json' })
-	response = JSON.parse(resource.body)
-	puts response["userid"]
+  # Get resource
+  resource = token.get('/3/account/get.php?', :params => { 'f' => 'json' })
+  response = JSON.parse(resource.body)
+  puts response["userid"]
 rescue OAuth2::Error => e
-	puts e.response.parsed['errorDesc']
+  puts e.response.parsed['errorDesc']
 end
