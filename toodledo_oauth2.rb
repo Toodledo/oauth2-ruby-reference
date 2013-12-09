@@ -50,9 +50,7 @@ class ToodledoOAuth2
       :udid => @device_id
     }
 
-    conn = Faraday.new(nil, :ssl => {
-      :ca_file => '/Users/aartola/Sites/kitebin/search/certs/ca-bundle.crt'
-    })
+    conn = Faraday.new()
 
     conn.basic_auth(@@client_id, @@client_secret)
 
@@ -74,9 +72,7 @@ class ToodledoOAuth2
       :udid => @device_id
     }
 
-    conn = Faraday.new(nil, :ssl => {
-      :ca_file => '/Users/aartola/Sites/kitebin/search/certs/ca-bundle.crt'
-    })
+    conn = Faraday.new()
 
     conn.basic_auth(@@client_id, @@client_secret)
 
@@ -89,9 +85,7 @@ class ToodledoOAuth2
   def resource(resource_url, access_token)
     url = resource_url + "?access_token=" + access_token
 
-    conn = Faraday.new(nil, :ssl => {
-      :ca_file => '/Users/aartola/Sites/kitebin/search/certs/ca-bundle.crt'
-    })
+    conn = Faraday.new()
 
     response = conn.get(url)
 
