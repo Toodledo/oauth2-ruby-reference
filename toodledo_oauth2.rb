@@ -51,11 +51,8 @@ class ToodledoOAuth2
     }
 
     conn = Faraday.new()
-
     conn.basic_auth(@@client_id, @@client_secret)
-
     response = conn.post(@@token_url, params)
-
     return JSON.parse(response.env[:body])
   end
 
@@ -73,22 +70,16 @@ class ToodledoOAuth2
     }
 
     conn = Faraday.new()
-
     conn.basic_auth(@@client_id, @@client_secret)
-
     response = conn.post(@@token_url, params)
-
     return JSON.parse(response.env[:body])
   end
 
   # Uses an access token to request something from the API
   def resource(resource_url, access_token)
     url = resource_url + "?access_token=" + access_token
-
     conn = Faraday.new()
-
     response = conn.get(url)
-
     return JSON.parse(response.env[:body])
   end
 end
