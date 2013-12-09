@@ -25,7 +25,7 @@ class ToodledoOAuth2
     @os_version = os_version
     @device_name = device_name
     @device_id = device_id
-    @state = state #"xyz"
+    @state = state
   end
 
   # Authorization url that you will need to redirect your user to
