@@ -11,8 +11,8 @@ state = "52a200bee3282"
 
 # Credentials
 
-client_id = "alejandrotest" # ""
-client_secret = "api52a0d6560a8f9" # ""
+client_id = ""
+client_secret = ""
 
 scope = "basic tasks"
 
