@@ -25,7 +25,6 @@ get '/' do
       @token = client.auth_code.get_token(@code)
     end
   rescue OAuth2::Error => e
-    puts e.inspect
     @error = e.response.parsed['errorDesc']
   end
 
