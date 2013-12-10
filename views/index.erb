@@ -1,0 +1,53 @@
+client id: <%= @client_id %>
+
+<div>
+  <a href="/authorize">Authorize</a>
+</div>
+
+<br />
+
+<% if @code %>
+<div>
+  Exchanging authorization_code for access_token: <%= @code %>
+</div>
+<br />
+<% end %>
+
+<% if @token %>
+<div>
+  <div>
+    Token: <%= @token.token %>
+  </div>
+  <div>
+    Refresh token: <%= @token.refresh_token %>
+  </div>
+</div>
+<br />
+<div>
+  Email: <%= @email %>
+</div>
+<br />
+<div>
+  <a href="/refresh">Refresh token</a>
+</div>
+<br />
+<% end %>
+
+<% if @error %>
+<div>  
+  Error: <%= @error %>
+</div>
+<br />
+<% end %>
+
+<div>
+  Session token: <%= @session[:token] %>
+<div>
+<div>
+  Refresh token: <%= @session[:refresh_token] %>
+<div>
+<br />
+
+<div>
+  <a href="/clear">Clear Session</a>
+</div>
