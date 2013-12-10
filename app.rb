@@ -1,3 +1,4 @@
+require './models/account'
 require 'sinatra'
 require 'oauth2'
 require 'json'
@@ -5,29 +6,15 @@ require 'json'
 enable :sessions
 
 get '/' do
-  @client_id = "rubytest"
-  client_secret = "api52a63b3a4d028"
+  account = ToodledoAccount.new
 
-  @code = request["code"]
-  state = "xyz"
-
-  scope = "basic tasks"
-
-  # Constant
-  authorization_url = "https://api.toodledo.com/3/account/authorize.php"
-  site = URI.escape(authorization_url + "?response_type=code&client_id=" + @client_id + "&state=" + state + "&scope=" + scope)
-
-  params = {
-    :site => site,
-    :authorize_url => site,
-    :token_url => "https://api.toodledo.com/3/account/token.php"
-  }
-
-  client = OAuth2::Client.new(@client_id, client_secret, params)
+  client = OAuth2::Client.new(account.client_id, account.client_secret, account.client_params)
   token = session[:token]
   opts = {
     :refresh_token => session[:refresh_token]
   }
+
+  @code = request["code"]
 
   begin
     if token
@@ -38,11 +25,11 @@ get '/' do
       @token = client.auth_code.get_token(@code)
     end
   rescue OAuth2::Error => e
+    puts e.inspect
     @error = e.response.parsed['errorDesc']
   end
 
   if @token
-    puts @token.inspect
     session[:token] = @token.token
     session[:refresh_token] = @token.refresh_token
 
@@ -51,49 +38,28 @@ get '/' do
     @email = response["email"]
   end
 
+  @client_id = account.client_id
   @session = session
 
   erb :index
 end
 
 get '/authorize' do
-  @client_id = "rubytest"
-  state = "xyz"
-  scope = "basic tasks"
+  account = ToodledoAccount.new
 
-  # Constant
-  authorization_url = "https://api.toodledo.com/3/account/authorize.php"
-  site = URI.escape(authorization_url + "?response_type=code&client_id=" + @client_id + "&state=" + state + "&scope=" + scope)
-
-  redirect site
+  redirect account.auth_url
 end
 
 get '/refresh' do
-  @client_id = "rubytest"
-  client_secret = "api52a63b3a4d028"
+  account = ToodledoAccount.new
 
-  state = "xyz"
-  scope = "basic tasks"
-
-  # Constant
-  authorization_url = "https://api.toodledo.com/3/account/authorize.php"
-  site = URI.escape(authorization_url + "?response_type=code&client_id=" + @client_id + "&state=" + state + "&scope=" + scope)
-
-  params = {
-    :site => site,
-    :authorize_url => site,
-    :token_url => "https://api.toodledo.com/3/account/token.php"
-  }
-
-  client = OAuth2::Client.new(@client_id, client_secret, params)
+  client = OAuth2::Client.new(account.client_id, account.client_secret, account.client_params)
   token = session[:token]
   opts = {
     :refresh_token => session[:refresh_token]
   }
 
   @token = OAuth2::AccessToken.new(client, token, opts)
-
-  puts @token.inspect
 
   # Referesh token example
   begin
