@@ -29,19 +29,16 @@ get '/' do
     :refresh_token => session[:refresh_token]
   }
 
-  if token
-    begin
+  begin
+    if token
+      # Instantiate token based on token session string
       @token = OAuth2::AccessToken.new(client, token, opts)
-    rescue OAuth2::Error => e
-      @error = e.response.parsed['errorDesc']
-    end
-  elsif @code
-    begin
+    elsif @code
       # Request token
       @token = client.auth_code.get_token(@code)
-    rescue OAuth2::Error => e
-      @error = e.response.parsed['errorDesc']
     end
+  rescue OAuth2::Error => e
+    @error = e.response.parsed['errorDesc']
   end
 
   if @token
