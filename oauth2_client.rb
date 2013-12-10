@@ -6,13 +6,13 @@ require 'oauth2'
 # For testing purposes, copy auth_code and state from the following:
 # https://api.toodledo.com/3/playground.php
 
-auth_code = "0b38d627809d2efadc19a66590e945f8178a8825"
+auth_code = "577b8c0f7e47651827eda2d8544184cdd7971d56"
 state = "52a200bee3282"
 
-# Credentials
+# Fill in your credentials
 
-client_id = ""
-client_secret = ""
+client_id = "rubytest"
+client_secret = "api52a63b3a4d028"
 
 scope = "basic tasks"
 
@@ -27,7 +27,7 @@ params = {
   :site => site,
   :authorize_url => site,
   :token_url => "https://api.toodledo.com/3/account/token.php"
-  }
+}
 
 begin
   # Request token
