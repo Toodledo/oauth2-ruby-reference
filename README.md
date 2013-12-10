@@ -13,6 +13,6 @@ These are the dependencies:
 
 Run the web server with the following command:
 
-   ruby app.rb
+	ruby app.rb
 
 Visit the [local web server](http://0.0.0.0:4567/) to play with the web interface.
