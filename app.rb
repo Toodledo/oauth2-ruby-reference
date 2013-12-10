@@ -33,7 +33,7 @@ get '/' do
     session[:token] = @token.token
     session[:refresh_token] = @token.refresh_token
 
-    resource = @token.get('/3/account/get.php?', :params => { 'f' => 'json' })
+    resource = @token.get(account.resource_url, :params => { 'f' => 'json' })
     response = JSON.parse(resource.body)
     @email = response["email"]
   end
