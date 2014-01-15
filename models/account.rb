@@ -6,7 +6,7 @@ class ToodledoAccount
     @client_id = client_id || "rubytest"
     @client_secret = client_secret || "api52a63b3a4d028"
     @state = state || "xyz"
-    @scope = scope || "basic tasks"
+    @scope = scope || "outlines write"
 
     authorization_url = "https://api.toodledo.com/3/account/authorize.php"
     @auth_url = URI.escape(authorization_url + "?response_type=code&client_id=" + @client_id + "&state=" + @state + "&scope=" + @scope)
